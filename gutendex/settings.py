@@ -39,7 +39,8 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+# ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+ALLOWED_HOSTS = ['*'] 
 
 
 # Application definition
@@ -142,14 +143,23 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_ROOT = env('STATIC_ROOT')
+# STATIC_ROOT = env('STATIC_ROOT')
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+
+# # User-uploaded files
+# MEDIA_ROOT = env('MEDIA_ROOT')
+# MEDIA_URL = '/media/'
+# Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
+STATIC_ROOT = '/app/staticfiles'  # תיקיית הסטטיים ב-Docker
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-
-# User-uploaded files
-MEDIA_ROOT = env('MEDIA_ROOT')
+# User-uploaded files (Media)
 MEDIA_URL = '/media/'
+MEDIA_ROOT = '/app/media'  # תיקיית המדיה ב-Docker
+
 
 
 # Users for error reporting
