@@ -14,8 +14,8 @@ services:
       POSTGRES_DB: gutendex
       POSTGRES_USER: gutendex
       POSTGRES_PASSWORD: a-long-string-of-random-characters
-    ports:
-      - "5432:5432"
+    # ports:
+    #   - "5432:5432"
     networks:
       - backend  
 
@@ -41,8 +41,8 @@ services:
       SECRET_KEY: another-long-string-of-random-characters
     depends_on:
       - postgres
-    ports:
-      - "8000:8000"
+    # ports:
+    #   - "8000:8000"
     networks:
       - frontend
       - backend 

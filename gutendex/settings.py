@@ -37,7 +37,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+# DEBUG = env('DEBUG')
+DEBAG = True
 
 # ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 ALLOWED_HOSTS = ['*'] 
@@ -153,8 +154,10 @@ USE_TZ = True
 # MEDIA_URL = '/media/'
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATIC_ROOT = '/app/staticfiles'  # תיקיית הסטטיים ב-Docker
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles')]
+
+# STATIC_ROOT = '/app/staticfiles'  # תיקיית הסטטיים ב-Docker
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles')]
 
 # User-uploaded files (Media)
 MEDIA_URL = '/media/'
