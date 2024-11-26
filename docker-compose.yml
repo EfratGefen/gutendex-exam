@@ -2,21 +2,47 @@
 
 services:
   postgres:
-    image: postgres:14
-    container_name: gutendex_postgres
+    build:
+      context: .
+      dockerfile: Dockerfile.postgres
     restart: always
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./init.sql:/app/docker-entrypoint-initdb.d/init.sql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
-      POSTGRES_DB: ${DATABASE_NAME}
-      POSTGRES_USER: ${DATABASE_USER}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-    env_file:
-      - .env
+      # POSTGRES_DB: ${DATABASE_NAME}
+      # POSTGRES_USER: ${DATABASE_USER}
+      # POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: gutendex
+      POSTGRES_USER: gutendex
+      POSTGRES_PASSWORD: a-long-string-of-random-characters
     ports:
       - "5432:5432"
 
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    restart: always
+    env_file:
+       - gutendex/.env
+    volumes:
+      - .:/app
+    environment:
+      # DATABASE_HOST: postgres
+      # DATABASE_NAME: ${DATABASE_NAME}
+      # DATABASE_USER: ${DATABASE_USER}
+      # DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      # SECRET_KEY: ${SECRET_KEY}
+      DATABASE_HOST: postgres
+      DATABASE_NAME: gutendex
+      DATABASE_USER: gutendex
+      DATABASE_PASSWORD: a-long-string-of-random-characters
+      SECRET_KEY: another-long-string-of-random-characters
+    depends_on:
+      - postgres
+    ports:
+      - "8000:8000"
+
 volumes:
   postgres_data:
-
